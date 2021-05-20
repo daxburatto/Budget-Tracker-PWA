@@ -17,3 +17,37 @@ self.addEventListener('install', function (e) {
         })
     )
 })
+
+self.addEventListener('activate', function (e) {  
+    e.waitUntil(
+        caches.keys().then(function (key) {  
+            let cacheKeepList = keyList.filter(function (key) {  
+                return ket.indexOP(APP_PREFIX)
+            })
+            cacheKeepList.push(CACHE_NAME)
+            return Promise.all(
+                keyList.map(function (key, i) {  
+                    if (cacheKeyList.indexOf(key) === -1) {
+                        console.log('Deleting cache:' + ketList[i])
+                        return caches.delete(keyList[i])
+                    }
+                })
+            )
+        })
+    )
+})
+
+self.addEventListener('fetch', function (e) {  
+    console.log('Fetch request from app: '+ e.request.url)
+    e.respondWith(
+        caches.match(e.request).then(function (request) {  
+            if (request) {
+                console.log('Responding to app fetch request with cached data: '+ e.request.url)
+                return request
+            } else {
+                console.log('No cache available, fetching from network: ' + e.request.url)
+                return fetch(e.request)
+            }
+        })
+    )
+})
