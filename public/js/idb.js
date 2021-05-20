@@ -1,3 +1,6 @@
+const { response } = require("express")
+const { ServerResponse } = require("http")
+
 const indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB
 
 const dbName = "budgetdb"
@@ -28,5 +31,28 @@ function uploadTransaction() {
     const transactionObjectStore = transaction.objectStore('new_transaction')
     const getAll = transactionObjectStore.getAll()
     getAll.onsuccess = function () {  
-        
+        if (getAll.result.length > 0) {
+            fetch('/api/transaction/bulk', {
+                method: 'POST',
+                body: JSON.stringify(getAll.result),
+                headers: {
+                    Accept: 'application/json, text/plain, */*',
+                    'Content-Type': 'application/json'
+                }
+            }).then(response => response.json())
+            .then(serverResponse => {
+                if (serverResponse.message) {
+                    throw new Error(serverResponse)
+                }
+                const transaction = db.transaction(['new_transaction'], 'readwrite')
+                const transactionObjectStore = transaction.objectStore('new_transaction')
+                transactionObjectStore.clear()
+                console.log("App Online, data uploaded to DB")
+            }).catch(err => {
+                console.log(err)
+            })
+        }
     }
+}
+
+window.addEventListener('online', uploadTransaction)
