@@ -4,7 +4,7 @@
     "orientation": "portrait",
     "display": "standalone",
     "start_url": ".",
-    "description": "Budget Tracker is an effective and convenient way to track your expenses.",
+    "description": "Budget tracker can help you track your expenses.",
     "background_color": "#000",
     "theme_color": "#ff007f",
     "icons": [
