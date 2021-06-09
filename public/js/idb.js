@@ -3,7 +3,7 @@ const { ServerResponse } = require("http")
 
 const indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB
 
-const dbName = "budgetdb"
+const dbName = "budget"
 const dbVersion = 1
 const request = indexedDB.open(dbName, dbVersion)
 let db 
