@@ -8,6 +8,8 @@ By daxburatto
 
 Budget Tracker will help you add and subtract values from your budget to show how you spend.
 
+![Budget Tracker](public/images/budgettracker.png)
+
 ## Table of Contents
 
 * [Installation](#installation)
