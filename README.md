@@ -7,14 +7,13 @@ By daxburatto
 ## Description
 
 Budget Tracker will help you add and subtract values from your budget to show how you spend.
+![Heroku Deploy](https://budgettracker-pwa-w19.herokuapp.com/)
 
 ![Budget Tracker](public/images/budgettracker.png)
 
 ## Table of Contents
 
 * [Installation](#installation)
-* [Usage](#usage)
-* [Credits](#credits)
 * [License](#license)
 
 ## Installation
